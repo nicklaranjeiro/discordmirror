@@ -1,6 +1,5 @@
 const { Client, WebhookClient, MessageEmbed, } = require('discord.js-selfbot-v13');
 const client = new Client();
-const config = require('./config.json');
 const dotenv = require('dotenv');
 dotenv.config();
 
