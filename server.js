@@ -14,15 +14,12 @@ client.on('messageCreate', async (message) => {
     // GuildId is the server where messages are retreived from
     const guildId = client.guilds.cache.get(`${process.env.GUILDID}`);
 
-    // Channel is the where messages are retreived from
-    const channelId = client.channels.cache.get(`${process.env.CHANNELID}`);
-
     // Hook is the webhook used for the discord channel
     const hook = new WebhookClient({ url: `${process.env.WEBHOOK}` });
 
     if(message.author.id === hook.id) return;
 
-    if(message.guildId == guildId && message.channelId == channelId) {
+    if(message.guildId == guildId && `${process.env.CHANNELID}`.includes(message.channelId)) {
         if(message.attachments.size > 0) {
             const attachment = message.attachments.first();
             hook.send({
@@ -48,18 +45,28 @@ client.on('messageCreate', async (message) => {
         });
         } else if (message.interaction != null) {
             hook.send({ 
-            content: message.content,
-            embeds: [new MessageEmbed().setDescription(`This message is an interaction (slash command). \n Command Name: ${message.interaction.commandName} \n Invoked by: ${message.interaction.user.username}#${message.interaction.user.discriminator}`).setColor('RED')],
-            username: message.author.username,
-            avatarURL: message.author.avatarURL(), 
-        });
-        
+                content: message.content,
+                embeds: [new MessageEmbed().setDescription(`This message is an interaction (slash command). \n Command Name: ${message.interaction.commandName} \n Invoked by: ${message.interaction.user.username}#${message.interaction.user.discriminator}`).setColor('RED')],
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(), 
+            });
+            hook.send({ 
+                content: '<@&1082838481576927282>',
+                embeds: [new MessageEmbed().setDescription(`This message is an interaction (slash command). \n Command Name: ${message.interaction.commandName} \n Invoked by: ${message.interaction.user.username}#${message.interaction.user.discriminator}`).setColor('RED')],
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(), 
+            });        
         } else {
             let content = message.content
             hook.send({ 
-            content: content,
-            username: message.author.username,
-            avatarURL: message.author.avatarURL(),    
+                content: content,
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(),    
+            });
+            hook.send({ 
+                content: '<@&1082838481576927282>',
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(),    
             });
         }
     }
