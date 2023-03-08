@@ -51,7 +51,7 @@ client.on('messageCreate', async (message) => {
                 avatarURL: message.author.avatarURL(), 
             });
             hook.send({ 
-                content: '<@&1082838481576927282>',
+                content: '<@&1082398617878417490>',
                 embeds: [new MessageEmbed().setDescription(`This message is an interaction (slash command). \n Command Name: ${message.interaction.commandName} \n Invoked by: ${message.interaction.user.username}#${message.interaction.user.discriminator}`).setColor('RED')],
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(), 
@@ -64,7 +64,7 @@ client.on('messageCreate', async (message) => {
                 avatarURL: message.author.avatarURL(),    
             });
             hook.send({ 
-                content: '<@&1082838481576927282>',
+                content: '<@&1082398617878417490>',
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(),    
             });
