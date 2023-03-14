@@ -1,5 +1,7 @@
 const { Client, WebhookClient, MessageEmbed, } = require('discord.js-selfbot-v13');
-const client = new Client();
+const client = new Client({
+    checkUpdate: false,
+});
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -8,9 +10,6 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', async (message) => {
-    //Just reads your messages only
-    if(message.author.id !== client.user.id) return;
-
     // GuildId is the server where messages are retreived from
     const guildId = client.guilds.cache.get(`${process.env.GUILDID}`);
 
