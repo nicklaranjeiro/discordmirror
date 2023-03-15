@@ -19,6 +19,7 @@ client.on('messageCreate', async (message) => {
     if(message.author.id === hook.id) return;
 
     if(message.guildId == guildId && `${process.env.CHANNELID}`.includes(message.channelId)) {
+        var role = JSON.parse(`${process.env.CHANNELNAMES}`)[message.channelId];
         if(message.attachments.size > 0) {
             const attachment = message.attachments.first();
             let content = message.content;
@@ -29,7 +30,7 @@ client.on('messageCreate', async (message) => {
                 avatarURL: message.author.displayAvatarURL(),
             });
             hook.send({ 
-                content: '<@&1082398617878417490>',
+                content: role,
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(),    
             });
@@ -43,7 +44,7 @@ client.on('messageCreate', async (message) => {
                 embeds: message.embeds,
             }); 
             hook.send({ 
-                content: '<@&1082398617878417490>',
+                content: role,
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(),    
             });       
@@ -55,7 +56,7 @@ client.on('messageCreate', async (message) => {
                 avatarURL: message.author.avatarURL(), 
             });
             hook.send({ 
-                content: '<@&1082398617878417490>',
+                content: role,
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(),    
             });
@@ -67,7 +68,7 @@ client.on('messageCreate', async (message) => {
                 avatarURL: message.author.avatarURL(), 
             });
             hook.send({ 
-                content: '<@&1082398617878417490>',
+                content: role,
                 embeds: [new MessageEmbed().setDescription(`This message is an interaction (slash command). \n Command Name: ${message.interaction.commandName} \n Invoked by: ${message.interaction.user.username}#${message.interaction.user.discriminator}`).setColor('RED')],
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(), 
@@ -80,7 +81,7 @@ client.on('messageCreate', async (message) => {
                 avatarURL: message.author.avatarURL(),    
             });
             hook.send({ 
-                content: '<@&1082398617878417490>',
+                content: role,
                 username: message.author.username,
                 avatarURL: message.author.avatarURL(),    
             });
