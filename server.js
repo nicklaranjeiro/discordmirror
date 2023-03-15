@@ -21,10 +21,17 @@ client.on('messageCreate', async (message) => {
     if(message.guildId == guildId && `${process.env.CHANNELID}`.includes(message.channelId)) {
         if(message.attachments.size > 0) {
             const attachment = message.attachments.first();
+            let content = message.content;
             hook.send({
+                content: content,
                 files: [attachment.url],
                 username: message.author.username,
                 avatarURL: message.author.displayAvatarURL(),
+            });
+            hook.send({ 
+                content: '<@&1082398617878417490>',
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(),    
             });
         }
 
@@ -34,14 +41,24 @@ client.on('messageCreate', async (message) => {
                 embeds: [message.embeds[0], new MessageEmbed().setDescription(`This message is an interaction (slash command). \n Command Name: ${message.interaction.commandName} \n Invoked by: ${message.interaction.user.username}#${message.interaction.user.discriminator}`).setColor('RED')],
                 avatarURL: message.author.displayAvatarURL(),
                 embeds: message.embeds,
-            });        
+            }); 
+            hook.send({ 
+                content: '<@&1082398617878417490>',
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(),    
+            });       
         } else if (message.embeds.length > 0) {
             let embedData = message.embeds[0];
             hook.send({ 
-            embeds: [embedData],
-            username: message.author.username,
-            avatarURL: message.author.avatarURL(), 
-        });
+                embeds: [embedData],
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(), 
+            });
+            hook.send({ 
+                content: '<@&1082398617878417490>',
+                username: message.author.username,
+                avatarURL: message.author.avatarURL(),    
+            });
         } else if (message.interaction != null) {
             hook.send({ 
                 content: message.content,
